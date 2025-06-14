@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732ac98c8d17b3a4db71b378c04f432c, type: 3}
+  m_Name: CombinationSO
+  m_EditorClassIdentifier: 
+  combinations: 11010000120100001301000014010000
+  sprites:
+  - {fileID: 21300000, guid: 8fd56761f2bc08143a441bc16c6fca86, type: 3}
+  - {fileID: 21300000, guid: 1ed91e0f0c2edb34c94dadf24df76a30, type: 3}
+  - {fileID: 21300000, guid: ff6de998f03ad8e45b8322a13e107645, type: 3}
+  - {fileID: 21300000, guid: 3ea4c91c0e6dc6f4aa844770bab5efd7, type: 3}
+  combinacionesCantidad: 6
