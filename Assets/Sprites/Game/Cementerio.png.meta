@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cementerio_0: 5070735608375788840
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

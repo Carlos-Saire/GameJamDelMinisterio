@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 public class ButtonLoadScene : MyButton
 {
     [SerializeField] private string scene;
@@ -7,7 +8,16 @@ public class ButtonLoadScene : MyButton
     {
         if (interactue)
         {
-            LoadSceneManager.LoadScene(scene);
+            StartCoroutine(StartAnimation());
         }
+    }
+    IEnumerator StartAnimation()
+    {
+        Transicion.Instance.TransicionCerrarPuertas();
+        yield return new WaitForSecondsRealtime(2f);
+
+        LoadSceneManager.LoadScene(scene);
+       
+        
     }
 }

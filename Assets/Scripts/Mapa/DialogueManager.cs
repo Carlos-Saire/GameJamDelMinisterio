@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.InputSystem;
 public class DialogueManager : MonoBehaviour
 {
     public event Action OnFinishDialogue;
@@ -13,12 +14,8 @@ public class DialogueManager : MonoBehaviour
     private int currentIndex;
     private string[] currentDialogues;
 
-    [Header("Player Data")]
-    private static TMP_Text text_Player;
 
-    [Header("Characteristics")]
-    private TMP_Text text_NPC;
-    private TMP_Text text;
+   private TMP_Text text;
 
     private void Reset()
     {
@@ -29,9 +26,14 @@ public class DialogueManager : MonoBehaviour
     {
         text = GetComponentInChildren<TMP_Text>();
     }
-    public void SetText(TMP_Text text)
+    private void Update()
     {
-        this.text = text;
+        
+    }
+    public void StartDialogue(InputAction.CallbackContext callback)
+    {
+        if (!callback.performed) return;
+        SetDialogue(dialogues);
     }
     public void SetDialogue(DialogueSO[] dialogueSOs)
     {
