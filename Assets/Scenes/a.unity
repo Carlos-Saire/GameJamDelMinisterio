@@ -323,6 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogues:
   - {fileID: 11400000, guid: a33bbdbba8e45c94293025c87c58bea2, type: 2}
+  - {fileID: 11400000, guid: ee3a39c0968d36547b80c85bd890bfd6, type: 2}
   typingSpeed: 0.08
   waitAfterLine: 1.2
 --- !u!1 &245489559
