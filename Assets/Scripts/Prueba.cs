@@ -29,15 +29,11 @@ public class Prueba : MonoBehaviour
     [Header("Prueba2")]
     [SerializeField] private Prueba2[] prueba;
 
-    [SerializeField] private int repete;
-    private int currentRepeatCount = 0;
-
     public static event Action OnRepete;
+    public static event Func<int> OnCountEnemy;
 
     private void Start()
     {
-        currentRepeatCount = 0;
-
         for (int i = 0; i < transform.childCount; i++)
         {
             RectTransform rect = transform.GetChild(i).GetComponent<RectTransform>();
@@ -73,9 +69,6 @@ public class Prueba : MonoBehaviour
 
     private void OnNewHordeStart()
     {
-        StopAllCoroutines();
-        shuffledCombination.Clear();
-        CurrentPositon = 0;
         GenerateRandomCombination();
         StartCoroutine(GenerateAllNotes());
     }
@@ -161,19 +154,21 @@ public class Prueba : MonoBehaviour
 
         if (trails.Count == 0 && currentTrail == null)
         {
-            currentRepeatCount++;
-            Debug.Log("Se completó la ronda " + currentRepeatCount);
+            StartCoroutine(CheckEnemyAndRepeat());
+        }
+    }
 
-            if (currentRepeatCount < repete)
-            {
-                OnRepete?.Invoke();
-                GenerateRandomCombination();
-                StartCoroutine(GenerateAllNotes());
-            }
-            else
-            {
-                Debug.Log("¡Todas las repeticiones han terminado!");
-            }
+    private IEnumerator CheckEnemyAndRepeat()
+    {
+        yield return null; 
+
+        int count = OnCountEnemy?.Invoke() ?? 0;
+
+        if (count > 0)
+        {
+            OnRepete?.Invoke();
+            GenerateRandomCombination();
+            StartCoroutine(GenerateAllNotes());
         }
     }
 }

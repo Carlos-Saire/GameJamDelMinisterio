@@ -19,9 +19,10 @@ public class MonstruoController : MonoBehaviour
     private float speed;
     private Rigidbody2D rb;
     private bool enRetroceso = false;
+    private bool estaMuerto = false; 
     private Vector2 puntoRetroceso;
 
-    [Header("Dofade")]
+    [Header("DoFade")]
     private DoFade fade;
 
     [Header("SpriteRenderer")]
@@ -33,10 +34,11 @@ public class MonstruoController : MonoBehaviour
 
     private void Awake()
     {
-        fade=GetComponent<DoFade>();
-        spriteRenderer=GetComponent<SpriteRenderer>();
+        fade = GetComponent<DoFade>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         text_Vida = GetComponentInChildren<TMP_Text>();
     }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -46,14 +48,19 @@ public class MonstruoController : MonoBehaviour
         speed = distanceTarget / timeTarget;
         text_Vida.text = vidaActual.ToString();
     }
+
     private void Update()
     {
+        if (estaMuerto) return;
+
         if (vidaActual <= 0)
         {
+            estaMuerto = true;
             OnDead?.Invoke();
+            OnDead = null;
             fade.FadeOut();
             doFadeCanvas.FadeOut();
-            Destroy(gameObject,fade.TimeFadeOut+0.5f);
+            Destroy(gameObject, fade.TimeFadeOut + 0.5f);
             return;
         }
 
@@ -75,32 +82,31 @@ public class MonstruoController : MonoBehaviour
             if (Vector2.Distance(transform.position, puntoRetroceso) < 0.05f)
                 enRetroceso = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            RecibirGolpe();
-            //Destroy(gameObject);
-        }
     }
+
     private void OnEnable()
     {
-        Prueba.OnRepete += RecibirGolpe;
+       Prueba.OnRepete += RecibirGolpe;
     }
+
     private void OnDisable()
     {
         Prueba.OnRepete -= RecibirGolpe;
     }
+
     private void OnDestroy()
     {
         OnDead = null;
     }
+
     public void SetTarget(Transform value)
     {
         target = value;
     }
+
     private void RecibirGolpe()
     {
-        if (vidaActual <= 0 || enRetroceso)
+        if (vidaActual <= 0 || enRetroceso || estaMuerto) 
             return;
 
         vidaActual--;
@@ -109,9 +115,9 @@ public class MonstruoController : MonoBehaviour
         puntoRetroceso = (Vector2)transform.position + direccion * retrocesoDistancia;
 
         enRetroceso = true;
-
         Invoke(nameof(FinRetroceso), retrocesoDuracion);
     }
+
     private void FinRetroceso()
     {
         enRetroceso = false;
