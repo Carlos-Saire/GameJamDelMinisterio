@@ -152,8 +152,8 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 1
-  m_Color: {r: 1, g: 0.875397, b: 0, a: 1}
-  m_Intensity: 2
+  m_Color: {r: 0.46666667, g: 0.45882353, b: 1, a: 1}
+  m_Intensity: 3
   m_LightVolumeIntensity: 0.11
   m_LightVolumeEnabled: 1
   m_ApplyToSortingLayers: 0000000079de8ce5bdb015236f7dbc97ad152717
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 22279159}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0.92387956, w: 0}
-  m_LocalPosition: {x: 2.34, y: 1.01, z: 0}
+  m_LocalPosition: {x: 2.34, y: 0.93, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -518,7 +518,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab8b659b367327e4d9100aa4ec883f14, type: 2}
+  - {fileID: 2100000, guid: 55b221de9e121c64a8aa216a8ec770a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -559,7 +559,7 @@ Transform:
   m_GameObject: {fileID: 632752074}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.17, y: -0.13, z: -4.03}
+  m_LocalPosition: {x: 0.17, y: -0.13, z: -6.35}
   m_LocalScale: {x: 20.767387, y: 10.449, z: 10.449}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1147,7 +1147,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.953
-  m_Color: {r: 0.9725491, g: 0.9176471, b: 0.67058825, a: 1}
+  m_Color: {r: 0.46452639, g: 0.4575472, b: 1, a: 1}
   m_Intensity: 4
   m_LightVolumeIntensity: 0.11
   m_LightVolumeEnabled: 1
@@ -1192,7 +1192,7 @@ Transform:
   m_GameObject: {fileID: 1575620654}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0.92387956, w: 0}
-  m_LocalPosition: {x: -2.21, y: 2.13, z: 0}
+  m_LocalPosition: {x: -2.21, y: 2.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
