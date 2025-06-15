@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Vector2[] positionInitial;
     private void Awake()
     {
-        //dialogueManager = GetComponentInChildren<DialogueManager>();
+        dialogueManager = GetComponentInChildren<DialogueManager>();
     }
     private void Start()
     {
@@ -30,16 +30,16 @@ public class UIManager : MonoBehaviour
         {
             positionInitial[i]= ojectReset[i].anchoredPosition;
         }
-        //panelDialogos.SetActive(false);
+        panelDialogos.SetActive(false);
         //GameManager.instance.SetUIManager(this);
     }
     private void OnEnable()
     {
-        //dialogueManager.OnFinishDialogue += PanelDialogos;
+        dialogueManager.OnFinishDialogue += PanelDialogos;
     }
     private void OnDisable()
     {
-        //dialogueManager.OnFinishDialogue -= PanelDialogos;
+        dialogueManager.OnFinishDialogue -= PanelDialogos;
     }
     public void PanelFaild()
     {

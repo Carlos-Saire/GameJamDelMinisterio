@@ -11,7 +11,6 @@ public class TrailRendererController : MonoBehaviour
     [SerializeField] private RectTransform target;
 
     [Header("Movement Settings")]
-    [SerializeField] private float timeTarget;
     private RectTransform rectTransform;
     private float speed;
     private float distanceTarget;
@@ -24,25 +23,19 @@ public class TrailRendererController : MonoBehaviour
     [SerializeField] private float perfectWindow = 0.3f;
     [SerializeField] private float goodWindow = 0.6f;
 
-    [Header("Sound")]
-    [SerializeField] private AudioClipSO Up;
-    [SerializeField] private AudioClipSO Down;
-    [SerializeField] private AudioClipSO Left;
-    [SerializeField] private AudioClipSO Right;
-
     public static event Action Onsfx;
 
     private TrailRenderer trailRenderer;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         trailRenderer = GetComponent<TrailRenderer>();
     }
-
     private void Start()
     {
         distanceTarget = Vector3.Distance(rectTransform.position, target.position);
-        speed = distanceTarget / timeTarget;
+        speed = distanceTarget / distanceTarget;
     }
 
     private void Update()
@@ -60,10 +53,12 @@ public class TrailRendererController : MonoBehaviour
             HandleFail();
         }
     }
+
     private void OnDestroy()
     {
         UnsubscribeInput();
     }
+
     private void CheckInput()
     {
         if (inputReceived || eventCalled) return;
@@ -83,15 +78,22 @@ public class TrailRendererController : MonoBehaviour
     {
         if (eventCalled) return;
         eventCalled = true;
-
         UnsubscribeInput();
-
     }
 
     public void SetTarget(RectTransform target, KeyCode key)
     {
         this.target = target;
         inputKey = key;
+        hasArrived = false;
+    }
+
+    public void SetTarget(RectTransform target, KeyCode key, float timeToTarget)
+    {
+        this.target = target;
+        inputKey = key;
+        distanceTarget = Vector3.Distance(rectTransform.position, target.position);
+        speed = distanceTarget / timeToTarget;
         hasArrived = false;
     }
 
@@ -118,50 +120,27 @@ public class TrailRendererController : MonoBehaviour
 
         KeyCode pressedKey = KeyCode.None;
 
-        if (value == Vector2.up)
-            pressedKey = KeyCode.UpArrow;
-        else if (value == Vector2.down)
-            pressedKey = KeyCode.DownArrow;
-        else if (value == Vector2.left)
-            pressedKey = KeyCode.LeftArrow;
-        else if (value == Vector2.right)
-            pressedKey = KeyCode.RightArrow;
+        if (value == Vector2.up) pressedKey = KeyCode.UpArrow;
+        else if (value == Vector2.down) pressedKey = KeyCode.DownArrow;
+        else if (value == Vector2.left) pressedKey = KeyCode.LeftArrow;
+        else if (value == Vector2.right) pressedKey = KeyCode.RightArrow;
 
         if (pressedKey != inputKey)
         {
-            Debug.Log("Tecla incorrecta: se esperaba " + inputKey + " pero se presionó " + pressedKey);
+            Debug.Log($"Tecla incorrecta: se esperaba {inputKey}, pero se presionó {pressedKey}");
             HandleFail();
             return;
         }
 
-        PlaySound();
+        Onsfx?.Invoke();
         CheckInput();
     }
+
     private void HandleFail()
     {
         if (eventCalled) return;
 
         OnFail?.Invoke();
         InvokeEventOnce();
-    }
-
-    private void PlaySound()
-    {
-        Onsfx?.Invoke();
-        //switch (inputKey)
-        //{
-        //    case KeyCode.UpArrow:
-        //        Up.PlayOneShoot();
-        //        break;
-        //    case KeyCode.DownArrow:
-        //        Down.PlayOneShoot();
-        //        break;
-        //    case KeyCode.LeftArrow:
-        //        Left.PlayOneShoot();
-        //        break;
-        //    case KeyCode.RightArrow:
-        //        Right.PlayOneShoot();
-        //        break;
-        //}
     }
 }

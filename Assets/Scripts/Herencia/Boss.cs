@@ -8,6 +8,8 @@ public class Boss : MonoBehaviour
 
     [Header("Player Data")]
     [SerializeField] protected Transform player;
+
+
     protected virtual void Start()
     {
         GameManager.instance.SetBoos(this);

@@ -14,7 +14,6 @@ public class LoadSceneManager : MonoBehaviour
     }
     public static void LoadScene(string scene)
     {
-        Time.timeScale = 1;
         OnLoadScene?.Invoke();
         SceneManager.LoadScene(scene);
     }

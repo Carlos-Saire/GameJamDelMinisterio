@@ -32,6 +32,8 @@ public class Prueba : MonoBehaviour
     public static event Action OnRepete;
     public static event Func<int> OnCountEnemy;
 
+    private float Timeboss;
+
     private void Start()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -45,20 +47,20 @@ public class Prueba : MonoBehaviour
     {
         LoadSceneManager.OnLoadScene += ResetValues;
         PlayerGame.OnNewHorde += OnNewHordeStart;
+        MuquiController.OnStart += OnNewHordeStart;
     }
 
     private void OnDisable()
     {
         LoadSceneManager.OnLoadScene -= ResetValues;
         PlayerGame.OnNewHorde -= OnNewHordeStart;
+        MuquiController.OnStart -= OnNewHordeStart;
     }
 
     private void OnDestroy()
     {
         if (currentTrail != null)
-        {
             currentTrail.OnKeyPressed -= OnCurrentNoteKeyPressed;
-        }
     }
 
     private void ResetValues()
@@ -71,6 +73,13 @@ public class Prueba : MonoBehaviour
     {
         GenerateRandomCombination();
         StartCoroutine(GenerateAllNotes());
+    }
+
+    private void OnNewHordeStart(float timeToTarget)
+    {
+        GenerateRandomCombination();
+        StartCoroutine(GenerateAllNotes(timeToTarget));
+        Timeboss = timeToTarget;
     }
 
     public void GenerateRandomCombination()
@@ -91,14 +100,14 @@ public class Prueba : MonoBehaviour
 
     private Sprite GetSpriteForKey(KeyCode key)
     {
-        switch (key)
+        return key switch
         {
-            case KeyCode.UpArrow: return arrowUp;
-            case KeyCode.DownArrow: return arrowDown;
-            case KeyCode.LeftArrow: return arrowLeft;
-            case KeyCode.RightArrow: return arrowRight;
-            default: return null;
-        }
+            KeyCode.UpArrow => arrowUp,
+            KeyCode.DownArrow => arrowDown,
+            KeyCode.LeftArrow => arrowLeft,
+            KeyCode.RightArrow => arrowRight,
+            _ => null,
+        };
     }
 
     private IEnumerator GenerateAllNotes()
@@ -118,9 +127,8 @@ public class Prueba : MonoBehaviour
         RectTransform noteRect = noteObj.GetComponent<RectTransform>();
 
         noteRect.pivot = target.pivot;
-        Vector2 targetAnchoredPos = target.anchoredPosition;
-        Vector2 spawnAnchoredPos = targetAnchoredPos + new Vector2(0f, offsetY);
-        noteRect.anchoredPosition = spawnAnchoredPos;
+        Vector2 spawnPos = target.anchoredPosition + new Vector2(0f, offsetY);
+        noteRect.anchoredPosition = spawnPos;
 
         TrailRendererController controller = noteObj.GetComponent<TrailRendererController>();
         controller.SetTarget(target, shuffledCombination[CurrentPositon]);
@@ -129,9 +137,38 @@ public class Prueba : MonoBehaviour
         trails.Enqueue(controller);
 
         if (trails.Count == 1 && currentTrail == null)
-        {
             TryActivateNextNote();
+    }
+
+    private IEnumerator GenerateAllNotes(float timeToTarget)
+    {
+        trails.Clear();
+        for (int i = 0; i < childRects.Count; i++)
+        {
+            RectTransform target = childRects[i];
+            GenerateNote(target, timeToTarget);
+            yield return new WaitForSeconds(delay);
         }
+    }
+
+    private void GenerateNote(RectTransform target, float timeToTarget)
+    {
+        GameObject noteObj = Instantiate(notePrefab, target.parent);
+        RectTransform noteRect = noteObj.GetComponent<RectTransform>();
+
+        noteRect.pivot = target.pivot;
+        Vector2 spawnPos = target.anchoredPosition + new Vector2(0f, offsetY);
+        noteRect.anchoredPosition = spawnPos;
+
+        TrailRendererController controller = noteObj.GetComponent<TrailRendererController>();
+        float speed = timeToTarget / 4;
+        controller.SetTarget(target, shuffledCombination[CurrentPositon], speed);
+
+        ++CurrentPositon;
+        trails.Enqueue(controller);
+
+        if (trails.Count == 1 && currentTrail == null)
+            TryActivateNextNoteBoss(); 
     }
 
     private void TryActivateNextNote()
@@ -147,6 +184,19 @@ public class Prueba : MonoBehaviour
         currentTrail.StartMove();
     }
 
+    private void TryActivateNextNoteBoss()
+    {
+        if (trails.Count == 0)
+        {
+            currentTrail = null;
+            return;
+        }
+
+        currentTrail = trails.Dequeue();
+        currentTrail.OnKeyPressed += OnCurrentNoteKeyPressedBoss;
+        currentTrail.StartMove();
+    }
+
     private void OnCurrentNoteKeyPressed()
     {
         currentTrail.OnKeyPressed -= OnCurrentNoteKeyPressed;
@@ -159,15 +209,39 @@ public class Prueba : MonoBehaviour
         }
     }
 
+    private void OnCurrentNoteKeyPressedBoss()
+    {
+        currentTrail.OnKeyPressed -= OnCurrentNoteKeyPressedBoss;
+        TryActivateNextNoteBoss(); 
+
+        if (trails.Count == 0 && currentTrail == null)
+        {
+            OnRepete?.Invoke();
+            StartCoroutine(CheckEnemyAndRepeatBoss());
+        }
+    }
+
     private IEnumerator CheckEnemyAndRepeat()
     {
-        yield return null; 
+        yield return null;
 
         int count = OnCountEnemy?.Invoke() ?? 0;
         if (count > 0)
         {
             GenerateRandomCombination();
             StartCoroutine(GenerateAllNotes());
+        }
+    }
+
+    private IEnumerator CheckEnemyAndRepeatBoss()
+    {
+        yield return null;
+
+        int count = OnCountEnemy?.Invoke() ?? 0;
+        if (count > 0)
+        {
+            GenerateRandomCombination();
+            StartCoroutine(GenerateAllNotes(Timeboss));
         }
     }
 }

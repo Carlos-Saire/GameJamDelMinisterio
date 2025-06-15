@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class MuquiController : Boss
 {
@@ -13,19 +14,20 @@ public class MuquiController : Boss
     [SerializeField] private float speed;
     [SerializeField] private float speedRetund;
 
-    [SerializeField] private float time;
+    [SerializeField] private int life;
+    public static event Action<float> OnStart;
     protected override void Start()
     {
         base.Start();
         positionInitial = transform.position;
         distance = Vector2.Distance(transform.position, player.position);
         speed = distance / timeToTarget;
+        OnStart?.Invoke(timeToTarget);
     }
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Regresar();
         }
         if (!isLife)
             return;
@@ -42,16 +44,35 @@ public class MuquiController : Boss
             Destination(player.position,speed);
         }
     }
+    private void OnEnable()
+    {
+        Prueba.OnCountEnemy += GetCount;
+        Prueba.OnRepete += Regresar;
+    }
+    private void OnDisable()
+    {
+        Prueba.OnCountEnemy -= GetCount;
+        Prueba.OnRepete -= Regresar;
+    }
+    private int GetCount()
+    {
+        return life;
+    }
     private void Destination(Vector2 value,float speed)
     {
         transform.position = Vector2.MoveTowards(transform.position, value, speed*Time.deltaTime);
-        Debug.Log("Se mueve");
     }
     private void Regresar()
     {
         isReturn = true;
+        --life;
         distance = Vector2.Distance(transform.position, positionInitial);
         speedRetund = distance / timeReturn;
+        if(life <= 0)
+        {
+            isLife=false;
+            //GameManager.instance.Win();
+        }
     }
 
 }

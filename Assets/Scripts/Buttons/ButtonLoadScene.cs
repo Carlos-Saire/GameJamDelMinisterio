@@ -13,11 +13,9 @@ public class ButtonLoadScene : MyButton
     }
     public IEnumerator StartAnimation()
     {
-        //Transicion.Instance.TransicionCerrarPuertas();
+        Transicion.Instance.TransicionCerrarPuertas();
         yield return new WaitForSecondsRealtime(2f);
-
         LoadSceneManager.LoadScene(scene);
        
-        
     }
 }

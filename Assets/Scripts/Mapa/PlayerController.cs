@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         particle = GetComponentInChildren<ParticleSystem>();
         text = GetComponentInChildren<TMP_Text>();
-        GameManager.instance.SetPlayer(this.transform,text);
+        //GameManager.instance.SetPlayer(this.transform,text);
     }
     private void Start()
     {
