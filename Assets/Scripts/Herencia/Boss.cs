@@ -5,10 +5,14 @@ public class Boss : MonoBehaviour
 {
     [Header("Delay")]
     [SerializeField] private float delay;
-    private void Start()
+
+    [Header("Player Data")]
+    [SerializeField] protected Transform player;
+    protected virtual void Start()
     {
         GameManager.instance.SetBoos(this);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        //player=GameManager.instance.GetTransformPlayer();
     }
 
     public void StartCombat()

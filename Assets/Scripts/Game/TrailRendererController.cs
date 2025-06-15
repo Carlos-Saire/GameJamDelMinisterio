@@ -31,9 +31,12 @@ public class TrailRendererController : MonoBehaviour
     [SerializeField] private AudioClipSO Right;
 
     public static event Action Onsfx;
+
+    private TrailRenderer trailRenderer;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void Start()
@@ -51,6 +54,7 @@ public class TrailRendererController : MonoBehaviour
 
         if (rectTransform.position == target.position)
         {
+            Destroy(gameObject, trailRenderer.time);
             hasArrived = true;
             OnKeyPressed?.Invoke();
             HandleFail();
