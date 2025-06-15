@@ -235,7 +235,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      atocko coca_0: -7947948863090720003
+      atocko coca_1: 7341670828043782516
+      atocko coca_2: -2299089674495640428
+      atocko coca_3: -2832790089971197980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
