@@ -69,11 +69,13 @@ public class PlayerGame : MonoBehaviour
     private void OnEnable()
     {
         BuffLife.OnBuffLife += UpdateLife;
+        Prueba.OnCountEnemy += CountEnemy;
     }
 
     private void OnDisable()
     {
         BuffLife.OnBuffLife -= UpdateLife;
+        Prueba.OnCountEnemy -= CountEnemy;
     }
 
     private void OnDrawGizmos()
@@ -92,6 +94,7 @@ public class PlayerGame : MonoBehaviour
         }
         else
         {
+            GameManager.instance.StartCinematica();
             Debug.Log("Las hordas han terminado.");
         }
     }
@@ -139,6 +142,10 @@ public class PlayerGame : MonoBehaviour
         OnlifePlayer?.Invoke(live);
     }
 
+    private int CountEnemy()
+    {
+        return countEnemy;
+    }
     private IEnumerator WaitForGameManager()
     {
         yield return new WaitUntil(() => GameManager.instance != null);

@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -18,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Cinematica Dara")]
     private CinematicaController cinematica;
+
+    [Header("Boss Data")]
+    private Boss boss;
     private void Awake()
     {
         if (instance == null)
@@ -59,13 +61,23 @@ public class GameManager : MonoBehaviour
     {
         uiManager = value;
     }
+
+    public void SetBoos(Boss boss)
+    {
+        this.boss = boss;
+    }
     public void SetCinematica(CinematicaController cinematica)
     {
         this.cinematica = cinematica;
     }
     public void StartCinematica()
     {
-
+        if (!boss.gameObject.activeSelf)
+        {
+            boss.gameObject.SetActive(true);
+            boss.StartCombat();
+        }
+        cinematica.StartCinematica();
     }
     public void Dialogos(DialogueSO[] value)
     {

@@ -11,7 +11,7 @@ public class ButtonLoadScene : MyButton
             StartCoroutine(StartAnimation());
         }
     }
-    IEnumerator StartAnimation()
+    public IEnumerator StartAnimation()
     {
         Transicion.Instance.TransicionCerrarPuertas();
         yield return new WaitForSecondsRealtime(2f);

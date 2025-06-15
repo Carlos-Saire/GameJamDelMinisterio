@@ -1,40 +1,42 @@
-using System.Collections;
 using UnityEngine;
 
 public class CinematicaController : MonoBehaviour
 {
     [SerializeField] private GameObject[] cameras;
-    [SerializeField] private float delay = 2f;
-
-    private int currentCameraIndex;
+    private int currentCameraIndex ;
 
     private void Start()
     {
         GameManager.instance.SetCinematica(this);
-        StartCinematica();
     }
-
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            NextCamera();
+        }
+    }
     public void StartCinematica()
     {
-        StartCoroutine(CinematicaRoutine());
+        NextCamera(); 
     }
 
-    private IEnumerator CinematicaRoutine()
+    public void NextCamera()
     {
-        while (currentCameraIndex < cameras.Length - 1)
+        if (currentCameraIndex >= 0 && currentCameraIndex < cameras.Length)
         {
-            if (currentCameraIndex >= 0 && currentCameraIndex < cameras.Length)
-            {
-                cameras[currentCameraIndex].SetActive(false);
-            }
-
-            currentCameraIndex++;
-
-            cameras[currentCameraIndex].SetActive(true);
-
-            yield return new WaitForSeconds(delay);
+            cameras[currentCameraIndex].SetActive(false);
         }
 
-        Debug.Log("Cinemática terminada");
+        currentCameraIndex++;
+
+        if (currentCameraIndex < cameras.Length)
+        {
+            cameras[currentCameraIndex].SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Cinemática terminada");
+        }
     }
 }

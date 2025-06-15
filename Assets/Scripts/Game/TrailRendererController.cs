@@ -29,6 +29,8 @@ public class TrailRendererController : MonoBehaviour
     [SerializeField] private AudioClipSO Down;
     [SerializeField] private AudioClipSO Left;
     [SerializeField] private AudioClipSO Right;
+
+    public static event Action Onsfx;
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -141,21 +143,21 @@ public class TrailRendererController : MonoBehaviour
 
     private void PlaySound()
     {
-
-        switch (inputKey)
-        {
-            case KeyCode.UpArrow:
-                Up.PlayOneShoot();
-                break;
-            case KeyCode.DownArrow:
-                Down.PlayOneShoot();
-                break;
-            case KeyCode.LeftArrow:
-                Left.PlayOneShoot();
-                break;
-            case KeyCode.RightArrow:
-                Right.PlayOneShoot();
-                break;
-        }
+        Onsfx?.Invoke();
+        //switch (inputKey)
+        //{
+        //    case KeyCode.UpArrow:
+        //        Up.PlayOneShoot();
+        //        break;
+        //    case KeyCode.DownArrow:
+        //        Down.PlayOneShoot();
+        //        break;
+        //    case KeyCode.LeftArrow:
+        //        Left.PlayOneShoot();
+        //        break;
+        //    case KeyCode.RightArrow:
+        //        Right.PlayOneShoot();
+        //        break;
+        //}
     }
 }
