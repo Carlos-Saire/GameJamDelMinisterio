@@ -21,8 +21,8 @@ public class SettingSlider : MonoBehaviour
     private void Start()
     {
         volume = PlayerPrefs.GetFloat(key, 1f); 
-        slider.value = volume;
-        UpdateValue(volume);
+        slider.value = Mathf.Clamp01(volume);
+        //UpdateValue(volume);
     }
     private void OnApplicationQuit()
     {

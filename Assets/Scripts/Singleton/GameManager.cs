@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     public void Dialogos(DialogueSO[] value)
     {
         uiManager.IniciarDialogo(value);
+        EnableInput(false);
     }
     public void Fail()
     {
