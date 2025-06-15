@@ -1027,11 +1027,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: 5414da59a4256e646b4e679280a69088, type: 2}
   key: sfx
-  sprites:
-  - {fileID: 21300000, guid: d40e8c893f0c18841afd4e105275f395, type: 3}
-  - {fileID: 21300000, guid: c3d231560ee37e14abeb7e1c89555460, type: 3}
-  - {fileID: 21300000, guid: b60db465abac9e542ac12b227a77362d, type: 3}
-  image: {fileID: 499704103}
 --- !u!114 &376998723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1642,8 +1637,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: 5414da59a4256e646b4e679280a69088, type: 2}
   key: music
-  sprites: []
-  image: {fileID: 0}
 --- !u!114 &770622641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,7 +1877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e486f213a2581c748a5eb0a5c51fa282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: Introduction
+  scene: Mapa
 --- !u!1 &842338807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,8 +2820,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMixer: {fileID: 24100000, guid: 5414da59a4256e646b4e679280a69088, type: 2}
   key: master
-  sprites: []
-  image: {fileID: 0}
 --- !u!114 &1306731792
 MonoBehaviour:
   m_ObjectHideFlags: 0

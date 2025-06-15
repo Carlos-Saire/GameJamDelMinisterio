@@ -154,6 +154,7 @@ public class Prueba : MonoBehaviour
 
         if (trails.Count == 0 && currentTrail == null)
         {
+            OnRepete?.Invoke();
             StartCoroutine(CheckEnemyAndRepeat());
         }
     }
@@ -163,10 +164,8 @@ public class Prueba : MonoBehaviour
         yield return null; 
 
         int count = OnCountEnemy?.Invoke() ?? 0;
-
         if (count > 0)
         {
-            OnRepete?.Invoke();
             GenerateRandomCombination();
             StartCoroutine(GenerateAllNotes());
         }

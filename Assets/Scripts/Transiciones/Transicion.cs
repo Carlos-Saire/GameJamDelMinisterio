@@ -22,19 +22,6 @@ public class Transicion : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.B))
-        {
-            TransicionAbrirPuertas();
-        }
-        if (Input.GetKeyUp(KeyCode.V))
-        {
-            TransicionCerrarPuertas();
-
-        }
-    }
-   
     public void TransicionAbrirPuertas()
     {
         DOTween.Kill(ObjetoIzquierdo);

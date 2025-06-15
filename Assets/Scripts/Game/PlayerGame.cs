@@ -94,7 +94,7 @@ public class PlayerGame : MonoBehaviour
         }
         else
         {
-            //GameManager.instance.StartCinematica();
+            GameManager.instance.StartCinematica();
             Debug.Log("Las hordas han terminado.");
         }
     }
