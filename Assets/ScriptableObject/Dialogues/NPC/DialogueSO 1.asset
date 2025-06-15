@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: DialogueSO 1
   m_EditorClassIdentifier: 
   dialogues:
-  - Hola que tal
-  - Jorge es muy bajo
+  - 1-
+  - 2-
+  - 3-
+  - 4-
   option: 1

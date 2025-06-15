@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections;
+using System;
 public class Transicion : MonoBehaviour
 {
     [SerializeField] private RectTransform ObjetoIzquierdo;
@@ -10,6 +11,7 @@ public class Transicion : MonoBehaviour
     [SerializeField] private float Duracion;
     [SerializeField] private Ease Modificador;
     public static Transicion Instance;
+    public static event Action OnFinishOpenDoors;
     private void Awake()
     {
         if (Instance != this && Instance != null)
@@ -29,6 +31,7 @@ public class Transicion : MonoBehaviour
         Sequence secuencia = DOTween.Sequence();
         secuencia.Append(ObjetoIzquierdo.DOAnchorPosX(-PositionInitial, Duracion).SetEase(Modificador));
         secuencia.Join(ObjetoDerecho.DOAnchorPosX(PositionInitial, Duracion).SetEase(Modificador));
+        secuencia.OnComplete(CallEventOpen);
     }
     public void TransicionCerrarPuertas()
     {
@@ -43,5 +46,9 @@ public class Transicion : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2f);
         TransicionAbrirPuertas();
+    }
+    public void CallEventOpen()
+    {
+        OnFinishOpenDoors?.Invoke();
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DialogueSO
   m_EditorClassIdentifier: 
   dialogues:
-  - Aloa
-  - aea
+  - 1
+  - 2
   option: 0
