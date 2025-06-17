@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: DialogueSO 1
   m_EditorClassIdentifier: 
   dialogues:
-  - 1-
-  - 2-
-  - 3-
-  - 4-
+  - En mis tiempos de trabajo nunca habia visto algo igual.
+  - "Ten cuidado, son demasiados. \xBFEstas seguro que podras?"
   option: 1
