@@ -24,12 +24,16 @@ public class PlayerController : MonoBehaviour
 
     [Header("Text Data")]
    [SerializeField] private TMP_Text text; 
+    private Animator animatoranimator;
+    private SpriteRenderer spriteRenderer;
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
         particle = GetComponentInChildren<ParticleSystem>();
         text = GetComponentInChildren<TMP_Text>();
         GameManager.instance.SetPlayer(this.transform,text);
+        animatoranimator=GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
@@ -76,6 +80,7 @@ public class PlayerController : MonoBehaviour
     private void SetMove(Vector2 value)
     {
         inputMove = value;
+        Animaiton(value);
         if (value ==Vector2.zero)
         {
             particle.Stop();
@@ -85,6 +90,32 @@ public class PlayerController : MonoBehaviour
             particle.Play();
         }
     }
+    private void Animaiton(Vector2 value)
+    {
+        if (value.magnitude < 0.1f)
+        {
+            animatoranimator.Play("Idle");
+            return;
+        }
+
+        if (Mathf.Abs(value.x) > Mathf.Abs(value.y))
+        {
+            animatoranimator.Play("Derecha");
+            spriteRenderer.flipX = value.x < 0;
+        }
+        else
+        {
+            if (value.y > 0)
+            {
+                animatoranimator.Play("Arriba");
+            }
+            else
+            {
+                animatoranimator.Play("Abajo");
+            }
+        }
+    }
+
     private void SavePostion()
     {
         PlayerPrefs.SetFloat("PositionX",transform.position.x);
