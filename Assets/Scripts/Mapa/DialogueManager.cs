@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public event Action OnFinishDialogue;
@@ -11,6 +12,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private DialogueSO[] dialogues;
     [SerializeField] private float typingSpeed;
     [SerializeField] private float waitAfterLine;
+    [SerializeField] private Sprite[] arrayImagePanelDialogue;
+    [SerializeField] private Image imagePanelDialogue;
     private int currentIndex;
     private string[] currentDialogues;
 
@@ -21,6 +24,11 @@ public class DialogueManager : MonoBehaviour
     {
         typingSpeed = 0.08f;
         waitAfterLine = 1.2f;
+    }
+
+    private void Start()
+    {
+        imagePanelDialogue.sprite = arrayImagePanelDialogue[0];
     }
     private void Awake()
     {
@@ -49,10 +57,12 @@ public class DialogueManager : MonoBehaviour
         }
         if (dialogues[currentIndex].DialogueOption == DialogueSO.Option.Player)
         {
+            imagePanelDialogue.sprite = arrayImagePanelDialogue[1];
             StartDialogues(text);
         }
         else
         {
+            imagePanelDialogue.sprite = arrayImagePanelDialogue[0];
             StartDialogues(text);
         }
     }
@@ -67,15 +77,18 @@ public class DialogueManager : MonoBehaviour
         {
             if (dialogues[currentIndex].DialogueOption == DialogueSO.Option.Player)
             {
+                imagePanelDialogue.sprite = arrayImagePanelDialogue[1];
                 StartCoroutine(DialoguesCorritune(text));
             }
             else
             {
+                imagePanelDialogue.sprite = arrayImagePanelDialogue[0];
                 StartCoroutine(DialoguesCorritune(text));
             }
         }
         else
         {
+
             OnFinishDialogue?.Invoke();
             GameManager.instance.EnableInput(true);
         }

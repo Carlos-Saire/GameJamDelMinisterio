@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: DialogueSO
   m_EditorClassIdentifier: 
   dialogues:
-  - 1
-  - 2
+  - 'No se preocupe, mis rituales purificaran a esos espiritus. '
   option: 0
