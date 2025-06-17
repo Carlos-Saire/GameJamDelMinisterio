@@ -10985,7 +10985,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.19, y: -5.71, z: -10}
+  m_LocalPosition: {x: 10.16, y: -1.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11005,8 +11005,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocidadCamara: 0.025
   desplazamiento: {x: 0, y: 0, z: -10}
-  minClamp: {x: 0.1, y: -9.9}
-  maxClamp: {x: 12, y: 0.2}
+  minClamp: {x: -1.8, y: -1.6}
+  maxClamp: {x: 10.16, y: 7.94}
 --- !u!1 &534711427
 GameObject:
   m_ObjectHideFlags: 0
@@ -18323,6 +18323,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   ojectReset: []
   positionInitial: []
+  PanelWin: {fileID: 0}
 --- !u!1 &1577725995
 GameObject:
   m_ObjectHideFlags: 0

@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     public void Win()
     {
         Time.timeScale = 0;
+        uiManager.Win();
         OnEnableInput?.Invoke(false);
     }
     public void Pause()

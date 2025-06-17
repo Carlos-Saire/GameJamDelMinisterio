@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [Header("Reset")]
     [SerializeField] private RectTransform[] ojectReset;
     [SerializeField] private Vector2[] positionInitial;
+    [SerializeField] private DoMove PanelWin;
     private void Awake()
     {
         //dialogueManager = GetComponentInChildren<DialogueManager>();
@@ -65,6 +66,10 @@ public class UIManager : MonoBehaviour
                 break;
         }
         ResetPosition();
+    }
+    public void Win()
+    {
+        PanelWin.Go();
     }
     public void PanelTutorial(bool value)
     {
