@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class UIManager : MonoBehaviour
 {
 
@@ -81,9 +81,31 @@ public class UIManager : MonoBehaviour
     }
     public void IniciarDialogo(DialogueSO[] value)
     {
+        /*
         PanelDialogos();
         dialogueManager.SetDialogue(value);
+        */
+        OnClick();
     }
+
+
+    //
+    public  void OnClick()
+    {
+        
+            StartCoroutine(StartAnimation());
+        
+    }
+    public IEnumerator StartAnimation()
+    {
+        Transicion.Instance.TransicionCerrarPuertas();
+        yield return new WaitForSecondsRealtime(2f);
+
+        LoadSceneManager.LoadScene("a");
+
+
+    }
+    //
     public void PanelPause(bool value)
     {
         if (value)

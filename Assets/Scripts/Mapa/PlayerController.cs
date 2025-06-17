@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private ParticleSystem particle;
 
     [Header("Text Data")]
-    private TMP_Text text; 
+   [SerializeField] private TMP_Text text; 
     private void Awake()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        text.enabled = false;
+        //text.enabled = false;
         GetPosition();
         particle.Stop();
     }
