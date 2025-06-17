@@ -497,10 +497,10 @@ MonoBehaviour:
   KeyCode: 0
   delay: 0.5
   offsetY: 349.7
-  arrowUp: {fileID: 21300000, guid: 8fd56761f2bc08143a441bc16c6fca86, type: 3}
-  arrowDown: {fileID: 21300000, guid: 1ed91e0f0c2edb34c94dadf24df76a30, type: 3}
-  arrowLeft: {fileID: 21300000, guid: 3ea4c91c0e6dc6f4aa844770bab5efd7, type: 3}
-  arrowRight: {fileID: 21300000, guid: ff6de998f03ad8e45b8322a13e107645, type: 3}
+  arrowUp: {fileID: 5271826627182312132, guid: 072bac1c77c60e148b0c97f90c05fc79, type: 3}
+  arrowDown: {fileID: -2837341172640268815, guid: 206fea81c6743d5419454fb77097511c, type: 3}
+  arrowLeft: {fileID: 8999907291210467215, guid: d348a3265be8c4448804830e193e8c88, type: 3}
+  arrowRight: {fileID: 7307253097324093413, guid: 132bba19151e70346a51465f7085211f, type: 3}
   combinations: 11010000120100001301000014010000
   shuffledCombination: 
   prueba:
@@ -10386,7 +10386,11 @@ MonoBehaviour:
   - {fileID: 6069337412462145746, guid: 4a9422f6f46fffb4e8abccba8fe21823, type: 3}
   ordas:
   - {fileID: 11400000, guid: f1dd27201fd5fb647a300b7d1a66a6fe, type: 2}
-  - {fileID: 11400000, guid: f1dd27201fd5fb647a300b7d1a66a6fe, type: 2}
+  - {fileID: 11400000, guid: 20a577d14ea84a648b96b3c976218355, type: 2}
+  - {fileID: 11400000, guid: c330dc2bd25953444bece10859d54207, type: 2}
+  - {fileID: 11400000, guid: b8dab469160063048ac85980eab7d1e9, type: 2}
+  - {fileID: 11400000, guid: 5e84f572a7449e444be4353ba08da1b5, type: 2}
+  - {fileID: 11400000, guid: 754a063336ae4524ab2f39747c19c548, type: 2}
   delayBetweenOrdas: 0
   countEnemy: 0
   live: 0

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a0e0b5462f7064cadc83949297cd3c, type: 3}
   m_Name: OrdasSO 1
   m_EditorClassIdentifier: 
-  speedEnemy: 3
+  speedEnemy: 3.2
   countEnemy: 1
   timeGeneration: 1
